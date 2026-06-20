@@ -69,6 +69,8 @@ tr:hover.r-pag{background:#dcfce7}tr:hover.r-pend{background:#fef9c3}tr:hover.r-
 .date-input:focus{outline:none;border-color:#1e3a5f;background:#fff;color:#111}
 .date-ph{display:flex;align-items:center;gap:5px;padding:5px 7px;border:1px dashed rgba(0,0,0,.18);border-radius:6px;cursor:pointer;font-size:11px;opacity:.5;transition:opacity .15s}
 .date-ph:hover{opacity:.85;border-color:rgba(0,0,0,.35)}
+.date-ph-wrap{position:relative;display:inline-block;width:100%}
+.date-ph-real{position:absolute;inset:0;width:100%;height:100%;opacity:0;border:none;padding:0;margin:0;cursor:pointer}
 
 .badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
 .b-pag{background:#dcfce7;color:#15803d}.b-pend{background:#fef9c3;color:#854d0e}.b-venc{background:#fee2e2;color:#991b1b}
@@ -364,7 +366,7 @@ function renderAll(){
 
     const dateCell=item.fp
       ?'<input class="date-input" type="date" value="'+item.fp+'" onchange="setPago('+i+',this.value)">'
-      :'<div class="date-ph" onclick="openDate('+i+')"><i class="ti ti-calendar-plus" style="font-size:13px"></i><span>Seleccionar fecha</span></div><input type="date" id="dh'+i+'" style="position:absolute;opacity:0;width:1px;height:1px;top:0;left:0" onchange="setPago('+i+',this.value)">';
+      :'<div class="date-ph-wrap"><div class="date-ph"><i class="ti ti-calendar-plus" style="font-size:13px"></i><span>Seleccionar fecha</span></div><input type="date" class="date-ph-real" id="dh'+i+'" onchange="setPago('+i+',this.value)"></div>';
 
     const freqTag=item.freq==='trimestral'?'<span class="freq-tag"><i class="ti ti-refresh" style="font-size:9px"></i>trimestral</span>':'';
 
