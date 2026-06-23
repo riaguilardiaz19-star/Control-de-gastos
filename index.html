@@ -78,9 +78,16 @@ tr:hover.r-pag{background:#dcfce7}tr:hover.r-pend{background:#fef9c3}tr:hover.r-
 .dp{background:#16a34a}.de{background:#ca8a04}.dv{background:#dc2626}
 
 .row-actions{display:flex;align-items:center;gap:2px;justify-content:center}
-.icon-btn{background:none;border:none;cursor:pointer;color:inherit;opacity:.25;font-size:14px;padding:3px 4px;border-radius:4px;line-height:1;transition:opacity .15s,background .15s}
+.icon-btn{background:none;border:none;cursor:pointer;color:inherit;opacity:.35;font-size:14px;padding:4px 6px;border-radius:4px;line-height:1;transition:opacity .15s,background .15s}
 .icon-btn:hover{opacity:.7;background:rgba(0,0,0,.06)}
 .icon-btn.del:hover{color:#b91c1c;opacity:.8}
+.icon-btn.clear-fecha{opacity:.6;color:#b91c1c;font-size:13px}
+.icon-btn.clear-fecha:hover{opacity:1;background:rgba(185,28,28,.08)}
+.date-set-wrap{display:flex;align-items:center;gap:4px}
+.date-set-wrap .date-input{flex:1;min-width:0}
+.quitar-fecha-btn{flex-shrink:0;background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;border-radius:5px;padding:3px 7px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:3px;line-height:1;transition:background .15s}
+.quitar-fecha-btn:hover{background:#fecaca;border-color:#f87171}
+.quitar-fecha-btn i{font-size:12px}
 
 .inp-m{border:none;background:transparent;text-align:right;font-size:12px;font-variant-numeric:tabular-nums;width:82px;color:inherit;font-family:inherit;padding:0;cursor:text}
 .inp-m:focus{outline:none;border-bottom:1.5px solid #1e3a5f;color:#111 !important}
@@ -365,7 +372,7 @@ function renderAll(){
     const mDol=item.mDol?'<div class="mval" style="margin-top:2px"><span class="mcur">$</span><input class="inp-m" type="text" value="'+Number(item.mDol).toFixed(2)+'" onchange="updM('+i+',\'d\',this.value)"></div>':'';
 
     const dateCell=item.fp
-      ?'<input class="date-input" type="date" value="'+item.fp+'" onchange="setPago('+i+',this.value)">'
+      ?'<div class="date-set-wrap"><input class="date-input" type="date" value="'+item.fp+'" onchange="setPago('+i+',this.value)"><button class="quitar-fecha-btn" onclick="clearPago('+i+')" title="Quitar fecha de pago"><i class="ti ti-x"></i></button></div>'
       :'<div class="date-ph-wrap"><div class="date-ph"><i class="ti ti-calendar-plus" style="font-size:13px"></i><span>Seleccionar fecha</span></div><input type="date" class="date-ph-real" id="dh'+i+'" onchange="setPago('+i+',this.value)"></div>';
 
     const freqTag=item.freq==='trimestral'?'<span class="freq-tag"><i class="ti ti-refresh" style="font-size:9px"></i>trimestral</span>':'';
@@ -379,7 +386,6 @@ function renderAll(){
       '<td class="td-f">'+dateCell+'</td>'+
       '<td class="td-e"><span class="badge '+bc+'"><span class="dot '+dc+'"></span>'+e+'</span></td>'+
       '<td class="td-x"><div class="row-actions">'+
-        (item.fp?'<button class="icon-btn" onclick="clearPago('+i+')" title="Quitar fecha"><i class="ti ti-x"></i></button>':'')+
         '<button class="icon-btn" onclick="openEdit('+i+')" title="Editar gasto"><i class="ti ti-pencil"></i></button>'+
         '<button class="icon-btn del" onclick="delGasto('+i+')" title="Eliminar gasto"><i class="ti ti-trash"></i></button>'+
       '</div></td>';
